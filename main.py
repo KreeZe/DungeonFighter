@@ -594,22 +594,34 @@ Menu Du Jeux
 def menu():
     menu0 = pygame.image.load('data/menu0.png')
     menu1 = pygame.image.load('data/menu1.png')
+    touches = pygame.image.load('data/touches.png')
     continuer = True
+    continuer2 = True
     choix = 0
     entrer = 0
     while continuer != False:
-        entrer = 0
-        if choix == 0:
-            fenetre.blit(menu0,(0,0))
-        elif choix == 1:
-            fenetre.blit(menu1,(0,0))
-
+        fenetre.blit(touches,(0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 continuer = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     continuer = False
+                elif event.key == pygame.K_RETURN:
+                    continuer = False
+        pygame.display.update()
+    while continuer2 != False:
+        entrer = 0
+        if choix == 0:
+            fenetre.blit(menu0,(0,0))
+        elif choix == 1:
+            fenetre.blit(menu1,(0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                continuer2 = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    continuer2 = False
                 elif event.key == pygame.K_UP:
                     choix = (choix-1)%2
                 elif event.key == pygame.K_DOWN:
@@ -620,7 +632,7 @@ def menu():
         if entrer == 1 and choix == 0:
             main()
         elif entrer == 1 and choix == 1:
-            continuer = False
+            continuer2 = False
         pygame.display.update()
 
     pygame.quit()
